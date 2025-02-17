@@ -31,7 +31,6 @@ input:focus {
     outline: none;
 }
 
-
 button {
     padding: 12px 20px;
     background: #007bff;
@@ -64,6 +63,7 @@ button:hover {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
+    cursor: pointer;
 }
 
 .movie-card:hover {
@@ -80,4 +80,19 @@ button:hover {
     margin: 12px 0;
     font-weight: 600;
     color: #333;
+}
+
+/* Movie Details Page */
+#movie-details img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+#movie-details p {
+    font-size: 16px;
+    line-height: 1.5;
+    border: #0056b3;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }

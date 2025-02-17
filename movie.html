@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div id="movie-details">
+        </div>
+        <button onclick="goBack()">⬅ Back</button>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const movieId = urlParams.get("id");
+        
+        function fetchMovieDetails() {
+            const apiKey = "6824cf00"; 
+            fetch(`https://www.omdbapi.com/?i=${movieId}&apikey=${apiKey}`)
+                .then(response => response.json())
+                .then(movie => {
+                    if (movie.Response === "True") {
+                        document.getElementById("movie-details").innerHTML = `
+                            <h2>${movie.Title} (${movie.Year})</h2>
+                            <img src="${movie.Poster !== "N/A" ? movie.Poster : "no-image.png"}" alt="${movie.Title}">
+                            <p><strong>Plot:</strong><br> ${movie.Plot}</p>
+                            <p><strong>Director:</strong><br>${movie.Director}</p>
+                            <p><strong>Cast:</strong><br>${movie.Actors}</p>
+                            <p><strong>Genre:</strong><br>${movie.Genre}</p>
+                            <p><strong>IMDB Rating:</strong><br>⭐${movie.imdbRating}</p>
+                        `;
+                    } else {
+                        document.getElementById("movie-details").innerHTML = `<p>Movie not found.</p>`;
+                    }
+                })
+                .catch(error => console.error("Error fetching details:", error));
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        fetchMovieDetails();
+    </script>
+</body>
+</html>
+

@@ -1,10 +1,9 @@
 document.getElementById("search-btn").addEventListener("click", searchMovie);
 
 function searchMovie() {
-    const name = document.getElementById("search-input").value;
+    const name = document.getElementById("search-input").value.trim();
     const apiKey = "6824cf00"; 
     const url = `https://www.omdbapi.com/?s=${name}&apikey=${apiKey}`;
-    console.log("API URL:", url);
 
     document.getElementById("movie-container").innerHTML = "";
     document.getElementById("loading").style.display = "block";
@@ -23,6 +22,12 @@ function searchMovie() {
                         <h3>${movie.Title}</h3>
                         <p>${movie.Year}</p>
                     `;
+
+                    // Click event to open movie details page
+                    movieCard.addEventListener("click", () => {
+                        window.location.href = `movie.html?id=${movie.imdbID}`;
+                    });
+
                     document.getElementById("movie-container").appendChild(movieCard);
                 });
             } else {
