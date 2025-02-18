@@ -9,7 +9,7 @@
 <body>
     <header>
         <h1>Movie Search</h1>
-        <button><a href="fav.html">favs</a></button>
+        <button id="favs"><a href="fav.html">favs</a></button>
         <div class="toggle-container">
             <label class="switch">
                 <input type="checkbox" id="dark-mode-toggle">
@@ -21,7 +21,7 @@
     <div class="container">
         <input type="text" id="search-input" placeholder="Enter movie title">
         <button id="search-btn">Search</button>
-        <div id="loading" style="display: none;">Loading...</div>
+        <div id="loading" style="display: none;">Loading...</div> <!-- hidden initially so display is none -->
         <div id="movie-container"></div>
     </div>
 

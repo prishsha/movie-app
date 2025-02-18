@@ -20,17 +20,18 @@
             let favorites = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
 
             const favoriteMoviesContainer = document.getElementById("favorite-movies");
-            favoriteMoviesContainer.innerHTML = ""; // Clear existing content
+            favoriteMoviesContainer.innerHTML = ""; 
 
             if (favorites.length === 0) {
                 favoriteMoviesContainer.innerHTML = "<p>No favorite movies saved.</p>";
                 return;
             }
 
-            favorites.forEach(movie => {
+            favorites.forEach(movie => 
+            {
                 const movieCard = document.createElement("div");
                 movieCard.classList.add("movie-card");
-                movieCard.setAttribute("data-imdbid", movie.imdbID); // Set unique identifier
+                movieCard.setAttribute("data-imdbid", movie.imdbID);
 
                 movieCard.innerHTML = `
             <img src="${movie.Poster !== "N/A" ? movie.Poster : "no-image.png"}" alt="${movie.Title}">
@@ -44,22 +45,20 @@
         }
 
 
-        function removeFromFavorites(imdbID) {
+        function removeFromFavorites(imdbID) 
+        {
             let favorites = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
 
-            // Filter out the movie with the given imdbID
-            const updatedFavorites = favorites.filter(movie => movie.imdbID !== imdbID);
+            const updatedFavorites = favorites.filter(movie => movie.imdbID !== imdbID); //filter out given id
 
-            // Update localStorage
             localStorage.setItem("favoriteMovies", JSON.stringify(updatedFavorites));
 
-            // Remove the movie card from the DOM
             const movieCard = document.querySelector(`[data-imdbid="${imdbID}"]`);
-            if (movieCard) {
+            if (movieCard) 
+            {
                 movieCard.remove();
             }
 
-            // If no movies left, update UI
             if (updatedFavorites.length === 0) {
                 document.getElementById("favorite-movies").innerHTML = "<p>No favorite movies saved.</p>";
             }
