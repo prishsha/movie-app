@@ -1,15 +1,84 @@
 body {
-    font-family: 'Helvetica', sans-serif;
-    text-align: center;
-    background-color: #eef1f6;
-    margin: 0;
-    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+    background-color: #c2e6ec;
     color: #333;
+    text-align: center;
+    transition: background 0.3s, color 0.3s;
+}
+
+body.dark {
+    background-color: #0c1222;
+    color: #000000;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 5%;
+    background-color: #5fc4e7;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 12px;
+}
+
+header.dark {
+    background-color: #008a90;
+}
+
+.toggle-container {
+    display: flex;
+    align-items: center;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 20px;
+    margin-left: 10px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 13px;
+    width: 13px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #777f85;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
 }
 
 .container {
     max-width: 600px;
-    margin: 0 auto;
+    margin: 10px auto;
     background: #ffffff;
     padding: 25px;
     border-radius: 12px;
@@ -33,7 +102,7 @@ input:focus {
 
 button {
     padding: 12px 20px;
-    background: #007bff;
+    background: #5fc4e7;
     color: white;
     border: none;
     cursor: pointer;
@@ -44,9 +113,14 @@ button {
     box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
 }
 
+button.dark {
+    background-color: #0c1222;
+}
+
 button:hover {
     background: #0056b3;
 }
+
 
 #movie-container {
     display: flex;
@@ -57,7 +131,7 @@ button:hover {
 
 .movie-card {
     width: 220px;
-    background: #ffffff;
+    background: #c2e6ec;
     padding: 15px;
     margin: 15px;
     border-radius: 10px;
@@ -95,4 +169,14 @@ button:hover {
     line-height: 1.5;
     border: #0056b3;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+#favorite-movies {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+a {
+    color: #000000;
+    text-decoration: none;
 }

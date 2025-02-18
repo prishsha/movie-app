@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favourite Movies</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>My Favorite Movies</h1>
+        <button onclick="goBack()">⬅ Back</button>
+        <div id="favorite-movies"></div>
+    </div>
+
+    <script>
+        function loadFavorites() {
+            let favorites = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
+
+            const favoriteMoviesContainer = document.getElementById("favorite-movies");
+            favoriteMoviesContainer.innerHTML = ""; // Clear existing content
+
+            if (favorites.length === 0) {
+                favoriteMoviesContainer.innerHTML = "<p>No favorite movies saved.</p>";
+                return;
+            }
+
+            favorites.forEach(movie => {
+                const movieCard = document.createElement("div");
+                movieCard.classList.add("movie-card");
+                movieCard.setAttribute("data-imdbid", movie.imdbID); // Set unique identifier
+
+                movieCard.innerHTML = `
+            <img src="${movie.Poster !== "N/A" ? movie.Poster : "no-image.png"}" alt="${movie.Title}">
+            <h3>${movie.Title}</h3>
+            <p>${movie.Year}</p>
+            <button class="remove-fav" onclick="removeFromFavorites('${movie.imdbID}')">Remove</button>
+        `;
+
+                favoriteMoviesContainer.appendChild(movieCard);
+            });
+        }
+
+
+        function removeFromFavorites(imdbID) {
+            let favorites = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
+
+            // Filter out the movie with the given imdbID
+            const updatedFavorites = favorites.filter(movie => movie.imdbID !== imdbID);
+
+            // Update localStorage
+            localStorage.setItem("favoriteMovies", JSON.stringify(updatedFavorites));
+
+            // Remove the movie card from the DOM
+            const movieCard = document.querySelector(`[data-imdbid="${imdbID}"]`);
+            if (movieCard) {
+                movieCard.remove();
+            }
+
+            // If no movies left, update UI
+            if (updatedFavorites.length === 0) {
+                document.getElementById("favorite-movies").innerHTML = "<p>No favorite movies saved.</p>";
+            }
+        }
+
+
+        function goBack() {
+            window.history.back();
+        }
+
+        loadFavorites();
+    </script>
+</body>
+
+</html>

@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Details</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
+    <header>
+        <h1>Movie Search</h1>
+        <div class="toggle-container">
+            <label class="switch">
+                <input type="checkbox" id="dark-mode-toggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+    </header>
     <div class="container">
         <div id="movie-details">
         </div>
@@ -16,9 +27,21 @@
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const movieId = urlParams.get("id");
-        
+
+        document.getElementById("dark-mode-toggle").addEventListener("change", toggleDarkMode);
+
+        if (localStorage.getItem("darkMode") === "enabled") {
+            document.body.classList.add("dark");
+            document.getElementById("dark-mode-toggle").checked = true;
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark");
+            localStorage.setItem("darkMode", document.body.classList.contains("dark") ? "enabled" : "disabled");
+        }
+
         function fetchMovieDetails() {
-            const apiKey = "6824cf00"; 
+            const apiKey = "6824cf00";
             fetch(`https://www.omdbapi.com/?i=${movieId}&apikey=${apiKey}`)
                 .then(response => response.json())
                 .then(movie => {
@@ -47,4 +70,3 @@
     </script>
 </body>
 </html>
-
